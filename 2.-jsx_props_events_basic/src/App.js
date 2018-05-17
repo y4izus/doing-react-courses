@@ -1,8 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Counter from './Counter'
 
-const HolaMundo = React.createElement('div', {}, 'Hola Mundo!!!!')
-
-window.onload = function () {
-   ReactDOM.render(HolaMundo, document.getElementById('app'))
-}
+ReactDOM.render(<Counter />, document.getElementById('app'))
