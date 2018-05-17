@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ActionButton extends Component {
    render () {
@@ -10,6 +11,10 @@ class ActionButton extends Component {
 
    }
 
+}
+
+ActionButton.propTypes = {
+   onClick: PropTypes.func
 }
 
 export default ActionButton
