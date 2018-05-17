@@ -7,9 +7,10 @@ import { products } from './data/catalog.js'
 class Catalog extends Component {
    render () {
       return (
-         <div className="catalog-list">
+         <div className="catalog">
             <HeaderTitle title="Productos / Categoría"/>
             <CatalogList products={ products } />
+            <div className="footer"></div>
             {/* <ActionButton handleClick={ this.handleClickIncrementCounter } btnText="XXXClick para subir el contador"/> */}
          </div>
       )
