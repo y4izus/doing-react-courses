@@ -4,7 +4,7 @@ import { HeaderTitle } from './shared/HeaderTitle'
 import { CatalogList } from './catalog/CatalogList'
 import { products } from './data/catalog.js'
 
-class Catalog extends Component {
+export class Catalog extends Component {
    render () {
       return (
          <div className="catalog">
@@ -16,5 +16,3 @@ class Catalog extends Component {
       )
    }
 }
-
-export default Catalog
