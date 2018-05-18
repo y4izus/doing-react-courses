@@ -5,10 +5,12 @@ import { CartContent } from './cart/CartContent'
 
 export class Cart extends Component {
    render () {
+       const { cartProducts } = this.props
+
       return (
          <div className="cart">
             <HeaderTitle title="Tu compra"/>
-            <CartContent />
+            <CartContent cartProducts={ cartProducts }/>
             <div className="footer">
                <a className="button">Seguir comprando</a>
                <a className="button">Finalizar compra</a>

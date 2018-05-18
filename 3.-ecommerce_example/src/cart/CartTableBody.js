@@ -1,28 +1,36 @@
 import React, { Component, Fragment } from 'react'
+import { CartTableProduct } from './CartTableProduct'
 
 export class CartTableBody extends Component {
+    constructor(props){
+        super()
+        this.state = {
+            totalPrice: props.cartProducts.reduce((acc, e) => acc + e.subtotal, 0),
+            cartProducts: props.cartProducts
+        }
+        this.handleAddOneToExistingProduct = this.handleAddOneToExistingProduct.bind(this)
+    }
+
+    handleAddOneToExistingProduct(cartProduct){
+        console.log(cartProduct)
+        const productIndex = this.state.cartProducts.indexOf(cartProduct)
+        console.log(this.state)
+        const totalPrice = this.state.totalPrice
+        let productSubtotal = this.state.cartProducts[productIndex]
+        productSubtotal.subtotal += productSubtotal.price
+        productSubtotal.qty += 1 
+        this.setState({ totalPrice: totalPrice + cartProduct.price, cartProducts: this.state.cartProducts })
+    }
+
    render () {
-      return (
+    const { cartProducts } = this.props
+      
+    return (
          <Fragment>
             <tbody>
-               <tr>
-                  <td className="qty">1</td>
-                  <td className="description">
-                     <h3>iPhone 6</h3>
-                     <p>A wonderful yet expensive phone with many features that you'll never need</p>
-                  </td>
-                  <td className="unit-price">699.99 €</td>
-                  <td className="subtotal">699.99 €</td>
-                  <td className="actions">
-                     <a className="button">+ 1</a>
-                     <a className="button">- 1</a>
-                     <a className="button">Remove</a>
-                  </td>
-               </tr>
+                { cartProducts.map( e => <CartTableProduct key={ e.name } product={ e } handleAddOneToExistingProduct={ this.handleAddOneToExistingProduct }/>) }
                <tr className="summary">
-                  <td colSpan="4" className="total">
-                     699.99 €
-                  </td>
+                  <td colSpan="4" className="total">{ this.state.totalPrice } €</td>
                   <td></td>
                </tr>
             </tbody>
