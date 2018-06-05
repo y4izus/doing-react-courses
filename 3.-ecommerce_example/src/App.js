@@ -17,6 +17,12 @@ const reducer = (state, action) => {
     }
 }
 
+const addProductToCart = id => { return { type: ADD_PRODUCT_TO_CART, id } }
+const addOneProductToCart = id => { return { type: ADD_ONE_PRODUCT_TO_CART, id } }
+const quitOneProductFromCart = id => { return { type: QUIT_ONE_PRODUCT_FROM_CART, id } }
+const deleteProductFromCart = id => { return { type: DELETE_PRODUCT_FROM_CART, id } }
+
+
 const store = createStore(reducer)
 
 const products = [{
@@ -81,12 +87,12 @@ const cartProducts = [{
 
 const ECommerce = () => (
     <div className="shopping-cart">
-        <Catalog products={ products } onAddProductToCart={ id => store.dispatch({type: ADD_PRODUCT_TO_CART, id}) }/>
+        <Catalog products={ products } onAddProductToCart={ id => store.dispatch(addProductToCart(id)) }/>
         <Cart 
             cartProducts={ cartProducts } 
-            onAddOneProduct={ id => store.dispatch({type: ADD_ONE_PRODUCT_TO_CART, id}) } 
-            onQuitOneProduct={ id => store.dispatch({type: QUIT_ONE_PRODUCT_FROM_CART, id}) } 
-            onDeleteProduct={ id => store.dispatch({type: DELETE_PRODUCT_FROM_CART, id}) }/>
+            onAddOneProduct={ id => store.dispatch(addOneProductToCart(id)) } 
+            onQuitOneProduct={ id => store.dispatch(quitOneProductFromCart(id)) } 
+            onDeleteProduct={ id => store.dispatch(deleteProductFromCart(id)) }/>
         <Checkout />
     </div>
 )
