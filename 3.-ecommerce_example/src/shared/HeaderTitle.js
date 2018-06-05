@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export const HeaderTitle = props => {
-   return (
-      <div className="shop-header">
-         <h2>{ props.title }</h2>
-      </div>
-   )
-}
+export const HeaderTitle = ({ title }) => (
+    <div className="shop-header">
+        <h2>{ title }</h2>
+    </div>
+)

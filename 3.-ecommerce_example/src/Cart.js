@@ -1,21 +1,14 @@
-import React, { Component } from 'react'
-import ActionButton from './ActionButton'
+import React from 'react'
 import { HeaderTitle } from './shared/HeaderTitle'
 import { CartContent } from './cart/CartContent'
 
-export class Cart extends Component {
-   render () {
-       const { cartProducts } = this.props
-
-      return (
-         <div className="cart">
-            <HeaderTitle title="Tu compra"/>
-            <CartContent cartProducts={ cartProducts }/>
-            <div className="footer">
-               <a className="button">Seguir comprando</a>
-               <a className="button">Finalizar compra</a>
-            </div>
-         </div>
-      )
-   }
-}
+export const Cart = ({ cartProducts }) => (
+    <div className="cart">
+        <HeaderTitle title="Tu compra"/>
+        <CartContent cartProducts={ cartProducts }/>
+        <div className="footer">
+            <a className="button">Seguir comprando</a>
+            <a className="button">Finalizar compra</a>
+        </div>
+    </div>
+)
