@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CartTableProduct = ({ product, handleAddOneToExistingProduct }) => (
+export const CartTableProduct = ({ product, onAddOneProduct, onQuitOneProduct, onDeleteProduct }) => (
     <tr>
         <td className="qty">1</td>
         <td className="description">
@@ -10,9 +10,9 @@ export const CartTableProduct = ({ product, handleAddOneToExistingProduct }) => 
         <td className="unit-price">{ product.price } €</td>
         <td className="subtotal">{ product.subtotal }</td>
         <td className="actions">
-            <button type="button" onClick={ () => handleAddOneToExistingProduct(product) } className="button">+ 1</button>
-            <a className="button">- 1</a>
-            <a className="button">Remove</a>
+            <a className="button" onClick={ onAddOneProduct }>+ 1</a>
+            <a className="button" onClick={ onQuitOneProduct }>- 1</a>
+            <a className="button" onClick={ onDeleteProduct }>Remove</a>
         </td>
     </tr>
 )

@@ -2,11 +2,11 @@ import React from 'react'
 import { CartTableHeader } from './CartTableHeader'
 import { CartTableBody } from './CartTableBody'
 
-export const CartContent = ({ cartProducts }) => (
+export const CartContent = props => (
   <div className="cart-contents">
     <table cellSpacing="0">
       <CartTableHeader />
-      <CartTableBody cartProducts={ cartProducts } />
+      <CartTableBody { ...props } />
     </table>
   </div>
 )

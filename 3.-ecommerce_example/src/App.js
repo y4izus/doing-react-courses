@@ -7,7 +7,11 @@ import { Checkout } from './Checkout'
 
 const reducer = (state, action) => {
     switch(action.type){
-        case 'ADD_PRODUCT': console.log(`add product with id: ${action.id}`)
+        case 'ADD_PRODUCT_TO_CART': return console.log(`add product with id: ${action.id}`)
+        case 'ADD_ONE_PRODUCT_TO_CART': return console.log(`add one product to cart with id: ${action.id}`)
+        case 'QUIT_ONE_PRODUCT_FROM_CART': return console.log(`quit one product from cart with id: ${action.id}`)
+        case 'DELETE_PRODUCT_FROM_CART': return console.log(`delete product from cart with id: ${action.id}`)
+        
         default: return state
     }
 }
@@ -76,8 +80,12 @@ const cartProducts = [{
 
 const ECommerce = () => (
     <div className="shopping-cart">
-        <Catalog products={ products } onProductClick={ id => store.dispatch({type: 'ADD_PRODUCT', id}) }/>
-        <Cart cartProducts={ cartProducts } />
+        <Catalog products={ products } onAddProductToCart={ id => store.dispatch({type: 'ADD_PRODUCT_TO_CART', id}) }/>
+        <Cart 
+            cartProducts={ cartProducts } 
+            onAddOneProduct={ id => store.dispatch({type: 'ADD_ONE_PRODUCT_TO_CART', id}) } 
+            onQuitOneProduct={ id => store.dispatch({type: 'QUIT_ONE_PRODUCT_FROM_CART', id}) } 
+            onDeleteProduct={ id => store.dispatch({type: 'DELETE_PRODUCT_FROM_CART', id}) }/>
         <Checkout />
     </div>
 )

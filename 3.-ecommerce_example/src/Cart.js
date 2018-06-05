@@ -2,10 +2,10 @@ import React from 'react'
 import { HeaderTitle } from './shared/HeaderTitle'
 import { CartContent } from './cart/CartContent'
 
-export const Cart = ({ cartProducts }) => (
+export const Cart = props => (
     <div className="cart">
         <HeaderTitle title="Tu compra"/>
-        <CartContent cartProducts={ cartProducts }/>
+        <CartContent { ...props } />
         <div className="footer">
             <a className="button">Seguir comprando</a>
             <a className="button">Finalizar compra</a>

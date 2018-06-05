@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ProductListRow = ({ onClick, name, description, price }) => (
+export const ProductListRow = ({ onAddProductToCart, name, description, price }) => (
     <div className="product row">
         <div className="product-summary col three-fourths">
             <h2 className="product-title">{ name }</h2>
@@ -16,7 +16,7 @@ export const ProductListRow = ({ onClick, name, description, price }) => (
             <div className="product-add-to-cart col one-fourth">
             <div className="product-price">{ price }</div>
             <div className="add-to-cart">
-                <a className="button" onClick={ onClick }>Add to cart</a>
+                <a className="button" onClick={ onAddProductToCart }>Add to cart</a>
             </div>
         </div>
     </div>
