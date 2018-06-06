@@ -49,9 +49,7 @@ export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, on
 const mapStateToPropsCart = state => {
   return {
     cartProducts: state.cartProducts,
-    onAddOneProduct: state.onAddOneProduct,
-    onQuitOneProduct: state.onQuitOneProduct,
-    onDeleteProduct: state.onDeleteProduct
+    totalPrice: state.totalPrice
   }
 }
 

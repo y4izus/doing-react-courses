@@ -17,10 +17,7 @@ const CatalogListRaw = ({ onAddProductToCart }) => (
 )
 
 const mapStateToPropsCatalog = state => {
-  console.log('state: ', state)
-  return {
-    onAddProductToCart: state.onAddProductToCart
-  }
+  return { }
 }
 
 const mapDispatchToPropsCatalog = dispatch => {

@@ -12,7 +12,7 @@ import {
   DELETE_PRODUCT_FROM_CART
 } from './actionTypes'
 
-const reducer = (state={cartProducts:[]}, action) => {
+const reducer = (state={cartProducts:[], totalPrice:0}, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
       return addProductToCart( state, action.product )
@@ -32,6 +32,21 @@ const reducer = (state={cartProducts:[]}, action) => {
 }
 
 const addProductToCart = ( state, product ) => {
+  return {
+    cartProducts: [...state.cartProducts, 
+      {
+        id: product.id, 
+        name: product.name, 
+        description: product.description, 
+        price: product.price,
+        subtotal: product.price,
+        qty: 1 
+      }],
+    totalPrice: state.totalPrice + product.price
+  }
+}
+
+const deleteProductFromCart = ( state, product ) => {
   return {
     cartProducts: [...state.cartProducts, 
       {
