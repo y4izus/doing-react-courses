@@ -7,29 +7,6 @@ import {
   DELETE_PRODUCT_FROM_CART } 
 from "./../actionTypes"
 
-
-// export class CartTableBody extends Component {
-//     constructor(props){
-//         super()
-//         this.state = {
-//             totalPrice: props.cartProducts.reduce((acc, e) => acc + e.subtotal, 0),
-//             cartProducts: props.cartProducts
-//         }
-//         this.handleAddOneToExistingProduct = this.handleAddOneToExistingProduct.bind(this)
-//     }
-
-//     handleAddOneToExistingProduct(cartProduct){
-//         console.log(cartProduct)
-//         const productIndex = this.state.cartProducts.indexOf(cartProduct)
-//         console.log(this.state)
-//         const totalPrice = this.state.totalPrice
-//         let productSubtotal = this.state.cartProducts[productIndex]
-//         productSubtotal.subtotal += productSubtotal.price
-//         productSubtotal.qty += 1 
-//         this.setState({ totalPrice: totalPrice + cartProduct.price, cartProducts: this.state.cartProducts })
-//     }
-// }
-
 export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, onQuitOneProduct, onDeleteProduct }) => (
   <tbody>
     { cartProducts.map( (product, index) => 
@@ -61,9 +38,7 @@ const mapDispatchToPropsCart = dispatch => {
   }
 }
 
-
 const addOneProductToCart = product => {
-  console.log(product)
   return { type: ADD_ONE_PRODUCT_TO_CART, product }
 }
 const quitOneProductFromCart = product => {
