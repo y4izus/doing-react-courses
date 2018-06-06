@@ -47,9 +47,8 @@ const addProductToCart = ( state, product ) => {
 
 const deleteProductFromCart = ( state, product ) => {
   return {
-    cartProducts: state.cartProducts
-        .slice(0, product.index)
-        .concat(state.cartProducts.slice(product.index + 1)), 
+    cartProducts: [...state.cartProducts.slice(0, product.index),
+                   ...state.cartProducts.slice(product.index + 1)], 
     totalPrice: state.totalPrice - product.subtotal 
   }
 }
