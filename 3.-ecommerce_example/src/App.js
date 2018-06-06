@@ -39,46 +39,6 @@ const products = [
   }
 ]
 
-const reducer = (state={products}, action) => {
-  switch (action.type) {
-    case ADD_PRODUCT_TO_CART:
-      console.log(`add product: ${action.id}`)
-      return state
-    case ADD_ONE_PRODUCT_TO_CART:
-      return console.log(`add one product to cart: ${action.id}`)
-    case QUIT_ONE_PRODUCT_FROM_CART:
-      return console.log(`quit one product from cart: ${action.id}`)
-    case DELETE_PRODUCT_FROM_CART:
-      return console.log(`delete product from cart: ${action.id}`)
-
-    default:
-      return state
-  }
-}
-
-const addOneProductToCart = id => {
-  return { type: ADD_ONE_PRODUCT_TO_CART, id }
-}
-const quitOneProductFromCart = id => {
-  return { type: QUIT_ONE_PRODUCT_FROM_CART, id }
-}
-const deleteProductFromCart = id => {
-  return { type: DELETE_PRODUCT_FROM_CART, id }
-}
-
-const store = createStore(reducer)
-
-const mapStateToPropsCart = state => {
-  return {
-    cartProducts: state.cartProducts,
-    onAddOneProduct: state.onAddOneProduct,
-    onQuitOneProduct: state.onQuitOneProduct,
-    onDeleteProduct: state.onDeleteProduct
-  }
-}
-
-
-
 const cartProducts = [
   {
     id: 1,
@@ -114,16 +74,33 @@ const cartProducts = [
   }
 ]
 
+const reducer = (state={products, cartProducts}, action) => {
+  switch (action.type) {
+    case ADD_PRODUCT_TO_CART:
+      console.log(`add product: ${action.id}`)
+      return state
+    case ADD_ONE_PRODUCT_TO_CART:
+      console.log(`add one product to cart: ${action.id}`)
+      return state
+    case QUIT_ONE_PRODUCT_FROM_CART:
+      console.log(`quit one product from cart: ${action.id}`)
+      return state
+    case DELETE_PRODUCT_FROM_CART:
+      console.log(`delete product from cart: ${action.id}`)
+      return state
+
+    default:
+      return state
+  }
+}
+
+const store = createStore(reducer)
+
 const ECommerce = () => (
   <Provider store={store}>
     <div className='shopping-cart'>
       <Catalog />
-      <Cart
-        cartProducts={cartProducts}
-        onAddOneProduct={id => store.dispatch(addOneProductToCart(id))}
-        onQuitOneProduct={id => store.dispatch(quitOneProductFromCart(id))}
-        onDeleteProduct={id => store.dispatch(deleteProductFromCart(id))}
-        />
+      <Cart />
       <Checkout />
     </div>
   </Provider>

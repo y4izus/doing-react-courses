@@ -1,5 +1,12 @@
 import React from 'react'
+import { connect } from "react-redux"
 import { CartTableProduct } from './CartTableProduct'
+import { 
+  ADD_ONE_PRODUCT_TO_CART,
+  QUIT_ONE_PRODUCT_FROM_CART,
+  DELETE_PRODUCT_FROM_CART } 
+from "./../actionTypes"
+
 
 // export class CartTableBody extends Component {
 //     constructor(props){
@@ -23,18 +30,51 @@ import { CartTableProduct } from './CartTableProduct'
 //     }
 // }
 
-export const CartTableBody = ({ cartProducts, totalPrice, onAddOneProduct, onQuitOneProduct, onDeleteProduct }) => (
-    <tbody>
-        { cartProducts.map( product => 
-            <CartTableProduct 
-                key={ product.name } 
-                product={ product }
-                onAddOneProduct={ () => onAddOneProduct(product.id) } 
-                onQuitOneProduct={ () => onQuitOneProduct(product.id) } 
-                onDeleteProduct={ () => onDeleteProduct(product.id) }/>) }
-        <tr className="summary">
-            <td colSpan="4" className="total">{ totalPrice } €</td>
-            <td></td>
-        </tr>
-    </tbody>
+export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, onQuitOneProduct, onDeleteProduct }) => (
+  <tbody>
+    { cartProducts.map( product => 
+      <CartTableProduct 
+          key={ product.name } 
+          product={ product }
+          onAddOneProduct={ () => onAddOneProduct(product.id) } 
+          onQuitOneProduct={ () => onQuitOneProduct(product.id) } 
+          onDeleteProduct={ () => onDeleteProduct(product.id) }/>) }
+    <tr className="summary">
+      <td colSpan="4" className="total">{ totalPrice } €</td>
+      <td></td>
+    </tr>
+  </tbody>
 )
+
+const mapStateToPropsCart = state => {
+  return {
+    cartProducts: state.cartProducts,
+    onAddOneProduct: state.onAddOneProduct,
+    onQuitOneProduct: state.onQuitOneProduct,
+    onDeleteProduct: state.onDeleteProduct
+  }
+}
+
+const mapDispatchToPropsCart = dispatch => {
+  return {
+    onAddOneProduct: id => dispatch(addOneProductToCart(id)),
+    onQuitOneProduct: id => dispatch(quitOneProductFromCart(id)),
+    onDeleteProduct: id => dispatch(deleteProductFromCart(id))
+  }
+}
+
+
+const addOneProductToCart = id => {
+  return { type: ADD_ONE_PRODUCT_TO_CART, id }
+}
+const quitOneProductFromCart = id => {
+  return { type: QUIT_ONE_PRODUCT_FROM_CART, id }
+}
+const deleteProductFromCart = id => {
+  return { type: DELETE_PRODUCT_FROM_CART, id }
+}
+
+export const CartTableBody = connect(
+  mapStateToPropsCart,
+  mapDispatchToPropsCart
+)(CartTableBodyRaw)
