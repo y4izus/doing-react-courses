@@ -12,46 +12,10 @@ import {
   DELETE_PRODUCT_FROM_CART
 } from './actionTypes'
 
-const cartProducts = [
-  {
-    id: 1,
-    name: 'iPhone 6',
-    description: 'Grandote pero chulo',
-    price: 2,
-    subtotal: 2,
-    qty: 1
-  },
-  {
-    id: 2,
-    name: 'Nexus 7',
-    description: 'El mejor Android de la historia.',
-    price: 2,
-    subtotal: 2,
-    qty: 1
-  },
-  {
-    id: 3,
-    name: 'Feberphone',
-    description: 'Dale a tu nene el Feber, no te vaya a romper el de verdad.',
-    price: 4,
-    subtotal: 4,
-    qty: 1
-  },
-  {
-    id: 4,
-    name: 'Woodyphone',
-    description: 'En madera reciclada. Cero potencia, todo conciencia.',
-    price: 4,
-    subtotal: 4,
-    qty: 1
-  }
-]
-
-const reducer = (state={cartProducts}, action) => {
+const reducer = (state={cartProducts:[]}, action) => {
   switch (action.type) {
     case ADD_PRODUCT_TO_CART:
-      console.log(`add product: ${action.id}`)
-      return state
+      return addProductToCart( state, action.product )
     case ADD_ONE_PRODUCT_TO_CART:
       console.log(`add one product to cart: ${action.id}`)
       return state
@@ -64,6 +28,20 @@ const reducer = (state={cartProducts}, action) => {
 
     default:
       return state
+  }
+}
+
+const addProductToCart = ( state, product ) => {
+  return {
+    cartProducts: [...state.cartProducts, 
+      {
+        id: product.id, 
+        name: product.name, 
+        description: product.description, 
+        price: product.price,
+        subtotal: product.price,
+        qty: 1 
+      }]
   }
 }
 

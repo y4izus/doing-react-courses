@@ -10,7 +10,7 @@ const CatalogListRaw = ({ onAddProductToCart }) => (
       <ProductListRow
         key={product.id}
         {...product}
-        onAddProductToCart={() => onAddProductToCart(product.id)}
+        onAddProductToCart={() => onAddProductToCart(product)}
       />
     ))}
   </div>
@@ -25,12 +25,12 @@ const mapStateToPropsCatalog = state => {
 
 const mapDispatchToPropsCatalog = dispatch => {
   return {
-    onAddProductToCart: id => dispatch(addProductToCart(id))
+    onAddProductToCart: product => dispatch(addProductToCart(product))
   }
 }
 
-const addProductToCart = id => {
-  return { type: ADD_PRODUCT_TO_CART, id }
+const addProductToCart = product => {
+  return { type: ADD_PRODUCT_TO_CART, product }
 }
 
 export const CatalogList = connect(
