@@ -17,11 +17,9 @@ const reducer = (state={cartProducts:[], totalPrice:0}, action) => {
     case ADD_PRODUCT_TO_CART:
       return addProductToCart( state, action.product )
     case ADD_ONE_PRODUCT_TO_CART:
-      console.log(addOneProductToCart( state, action.product))
       return addOneProductToCart( state, action.product)
     case QUIT_ONE_PRODUCT_FROM_CART:
-      console.log(`quit one product from cart: ${action.id}`)
-      return state
+      return quitOneProductFromCart( state, action.product)
     case DELETE_PRODUCT_FROM_CART:
       return deleteProductFromCart(state, action.product)
 
@@ -62,6 +60,29 @@ const addOneProductToCart = ( state, product ) => {
   return {
     cartProducts, 
     totalPrice: state.totalPrice + product.info.price 
+  }
+}
+
+const quitOneProductFromCart = ( state, product ) => {
+  if (product.info.qty === 1) 
+    return deleteProductFromCart ( state, { index: product.index, subtotal: product.info.subtotal }  )
+  
+  const updatedProduct = {
+    id: product.info.id, 
+    name: product.info.name, 
+    description: product.info.description, 
+    price: product.info.price,
+    subtotal: product.info.subtotal - product.info.price,
+    qty: product.info.qty - 1 
+  }
+  const cartProducts = [
+    ...state.cartProducts.slice(0, product.index),
+    updatedProduct,
+    ...state.cartProducts.slice(product.index + 1)
+  ]
+  return {
+    cartProducts, 
+    totalPrice: state.totalPrice - product.info.price 
   }
 }
 
