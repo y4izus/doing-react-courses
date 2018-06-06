@@ -36,7 +36,7 @@ export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, on
       <CartTableProduct 
           key={ product.name } 
           product={ product }
-          onAddOneProduct={ () => onAddOneProduct(product.id) } 
+          onAddOneProduct={ () => onAddOneProduct(index, product) } 
           onQuitOneProduct={ () => onQuitOneProduct(product.id) } 
           onDeleteProduct={ () => onDeleteProduct(index, product.subtotal) }/>) }
     <tr className="summary">
@@ -55,15 +55,16 @@ const mapStateToPropsCart = state => {
 
 const mapDispatchToPropsCart = dispatch => {
   return {
-    onAddOneProduct: id => dispatch(addOneProductToCart(id)),
+    onAddOneProduct: (index, info) => dispatch(addOneProductToCart({index, info})),
     onQuitOneProduct: id => dispatch(quitOneProductFromCart(id)),
     onDeleteProduct: (index, subtotal) => dispatch(deleteProductFromCart({index, subtotal}))
   }
 }
 
 
-const addOneProductToCart = id => {
-  return { type: ADD_ONE_PRODUCT_TO_CART, id }
+const addOneProductToCart = product => {
+  console.log(product)
+  return { type: ADD_ONE_PRODUCT_TO_CART, product }
 }
 const quitOneProductFromCart = id => {
   return { type: QUIT_ONE_PRODUCT_FROM_CART, id }
