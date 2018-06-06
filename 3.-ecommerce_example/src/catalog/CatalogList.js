@@ -2,8 +2,9 @@ import React from "react"
 import { connect } from "react-redux"
 import { ProductListRow } from "./ProductListRow"
 import { ADD_PRODUCT_TO_CART } from "./../actionTypes"
+import { products } from './../data/products'
 
-const CatalogListRaw = ({ products, onAddProductToCart }) => (
+const CatalogListRaw = ({ onAddProductToCart }) => (
   <div className="catalog-list">
     {products.map(product => (
       <ProductListRow
@@ -18,7 +19,6 @@ const CatalogListRaw = ({ products, onAddProductToCart }) => (
 const mapStateToPropsCatalog = state => {
   console.log('state: ', state)
   return {
-    products: state.products,
     onAddProductToCart: state.onAddProductToCart
   }
 }
