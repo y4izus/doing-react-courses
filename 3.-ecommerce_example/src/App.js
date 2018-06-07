@@ -1,15 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { Catalog } from './Catalog'
 import { Cart } from './Cart'
 import { Checkout } from './Checkout'
 import { Thanks } from './Thanks'
-import { reducer } from './reducers'
-
-const store = createStore(reducer)
+import appReducer from './modules'
+import store from './configureStore'
 
 const ECommerce = () => (
   <Provider store={store}>

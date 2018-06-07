@@ -1,19 +1,24 @@
-import {
-  ADD_PRODUCT_TO_CART,
-  ADD_ONE_PRODUCT_TO_CART,
-  QUIT_ONE_PRODUCT_FROM_CART,
-  DELETE_PRODUCT_FROM_CART
-} from './actionTypes'
+import * as ActionTypes from './actionTypes'
+export * from './actions'
+export * from './selectors'
 
-export const reducer = (state={cartProducts:[], totalPrice:0}, action) => {
+const initialState = {
+  cartProducts: [],
+  totalPrice: 0
+}
+
+
+
+
+const reducer = (state={cartProducts:[], totalPrice:0}, action) => {
   switch (action.type) {
-    case ADD_PRODUCT_TO_CART:
+    case ActionTypes.ADD_PRODUCT_TO_CART:
       return addProductToCart( state, action.product )
-    case ADD_ONE_PRODUCT_TO_CART:
+    case ActionTypes.ADD_ONE_PRODUCT_TO_CART:
       return addOneProductToCart( state, action.product)
-    case QUIT_ONE_PRODUCT_FROM_CART:
+    case ActionTypes.QUIT_ONE_PRODUCT_FROM_CART:
       return quitOneProductFromCart( state, action.product)
-    case DELETE_PRODUCT_FROM_CART:
+    case ActionTypes.DELETE_PRODUCT_FROM_CART:
       return deleteProductFromCart(state, action.product)
 
     default:
@@ -93,3 +98,6 @@ const deleteProductFromCart = ( state, product ) => {
     totalPrice: state.totalPrice - product.subtotal 
   }
 }
+
+
+export default reducer

@@ -1,8 +1,8 @@
 import React from "react"
 import { connect } from "react-redux"
 import { ProductListRow } from "./ProductListRow"
-import { ADD_PRODUCT_TO_CART } from "./../actionTypes"
 import { products } from './../data/products'
+import { addProductToCart } from '../modules/cart'
 
 const CatalogListRaw = ({ onAddProductToCart }) => (
   <div className="catalog-list">
@@ -24,10 +24,6 @@ const mapDispatchToPropsCatalog = dispatch => {
   return {
     onAddProductToCart: product => dispatch(addProductToCart(product))
   }
-}
-
-const addProductToCart = product => {
-  return { type: ADD_PRODUCT_TO_CART, product }
 }
 
 export const CatalogList = connect(

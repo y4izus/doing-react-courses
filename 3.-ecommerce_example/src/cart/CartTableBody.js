@@ -1,11 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { CartTableProduct } from './CartTableProduct'
-import { 
-  ADD_ONE_PRODUCT_TO_CART,
-  QUIT_ONE_PRODUCT_FROM_CART,
-  DELETE_PRODUCT_FROM_CART } 
-from "./../actionTypes"
+import { getCartProducts, getCartTotal, addOneProductToCart, quitOneProductFromCart, deleteProductFromCart } from '../modules/cart'
 
 export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, onQuitOneProduct, onDeleteProduct }) => (
   <tbody>
@@ -25,8 +21,8 @@ export const CartTableBodyRaw = ({ cartProducts, totalPrice, onAddOneProduct, on
 
 const mapStateToPropsCart = state => {
   return {
-    cartProducts: state.cartProducts,
-    totalPrice: state.totalPrice
+    cartProducts: getCartProducts(state),
+    totalPrice: getCartTotal(state)
   }
 }
 
@@ -36,16 +32,6 @@ const mapDispatchToPropsCart = dispatch => {
     onQuitOneProduct: (index, info) => dispatch(quitOneProductFromCart({index, info})),
     onDeleteProduct: (index, subtotal) => dispatch(deleteProductFromCart({index, subtotal}))
   }
-}
-
-const addOneProductToCart = product => {
-  return { type: ADD_ONE_PRODUCT_TO_CART, product }
-}
-const quitOneProductFromCart = product => {
-  return { type: QUIT_ONE_PRODUCT_FROM_CART, product }
-}
-const deleteProductFromCart = product => {
-  return { type: DELETE_PRODUCT_FROM_CART, product }
 }
 
 export const CartTableBody = connect(
