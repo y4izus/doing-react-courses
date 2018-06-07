@@ -22,17 +22,24 @@ export const reducer = (state={cartProducts:[], totalPrice:0}, action) => {
 }
 
 const addProductToCart = ( state, product ) => {
-  return {
-    cartProducts: [...state.cartProducts, 
-      {
-        id: product.id, 
-        name: product.name, 
-        description: product.description, 
-        price: product.price,
-        subtotal: product.price,
-        qty: 1 
-      }],
-    totalPrice: state.totalPrice + product.price
+  const productOnCart = state.cartProducts.filter(p => p.id === product.id) 
+  if(productOnCart.length > 0) {
+    const indexProduct = state.cartProducts.indexOf(productOnCart[0])
+    return addOneProductToCart(state, {index: indexProduct, info: productOnCart[0]})
+  } 
+  else {
+    return {
+      cartProducts: [...state.cartProducts, 
+        {
+          id: product.id, 
+          name: product.name, 
+          description: product.description, 
+          price: product.price,
+          subtotal: product.price,
+          qty: 1 
+        }],
+      totalPrice: state.totalPrice + product.price
+    }
   }
 }
 
