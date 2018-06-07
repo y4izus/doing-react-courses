@@ -3,10 +3,12 @@ import { connect } from "react-redux"
 import { compose, lifecycle } from 'recompose'
 import { ProductListRow } from "./ProductListRow"
 import { addProductToCart } from '../modules/cart'
-import { getProducts, receiveProducts } from '../modules/catalog'
+import { getProducts, isFetching, hasFetchError, fetchProducts } from '../modules/catalog'
 
-const CatalogListRaw = ({ products, addProductToCart }) => (
+const CatalogListRaw = ({ products, isFetching, hasError, addProductToCart }) => (
   <div className="catalog-list">
+    { isFetching && <p>Cargando.... </p>}
+    { hasError && <p>Error</p>}
     {products.map(product => (
       <ProductListRow
         key={product.id}
@@ -19,13 +21,15 @@ const CatalogListRaw = ({ products, addProductToCart }) => (
 
 const mapStateToPropsCatalog = state => {
   return { 
-    products: getProducts(state)
+    products: getProducts(state),
+    isFetching: isFetching(state),
+    hasError: hasFetchError(state)
   }
 }
 
 const mapDispatchToPropsCatalog = {
   addProductToCart,
-  receiveProducts 
+  fetchProducts
 }
 
 
@@ -35,13 +39,11 @@ const withCatalogData = connect(
 )
 
 const withFetchOnMount = lifecycle( {
-  componentDidMount() {
-    if(this.props.products.length === 0) {
-      fetch('/data/products.json')
-      .then(res => res.json())
-      .then(products => this.props.receiveProducts(products))
-    }
+  componentDidMount() {        
+    this.props.fetchProducts()    
   }
 })
 
-export const CatalogList = compose(withCatalogData, withFetchOnMount)(CatalogListRaw)
+const withCatalogLogic = compose(withCatalogData, withFetchOnMount)
+
+export const CatalogList = withCatalogLogic(CatalogListRaw)
