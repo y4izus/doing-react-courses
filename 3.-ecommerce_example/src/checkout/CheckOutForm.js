@@ -11,7 +11,7 @@ const CheckOutFormRaw = props =>  (
         <label>Nombre</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" id="nombre" onKeyDown={() => props.setName(nombre.value)}/>
+        <input type="text" id="nombre" onInput={() => props.setName(nombre.value)}/>
       </div>
     </div>
     <div className="row">
@@ -19,7 +19,7 @@ const CheckOutFormRaw = props =>  (
         <label>Apellidos</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" id="apellido" onKeyDown={() => props.setLastName(apellido.value)}/>
+        <input type="text" id="apellido" onInput={() => props.setLastName(apellido.value)}/>
       </div>
     </div>
     <div className="row">
@@ -27,7 +27,7 @@ const CheckOutFormRaw = props =>  (
         <label>Email</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" id="email" className='error' onKeyDown={() => props.setEmail(email.value)}/>
+        <input type="text" id="email" className='error' onInput={() => props.setEmail(email.value)}/>
         <span className="error-text">El email es obligatorio</span>
       </div>
     </div>
@@ -36,7 +36,7 @@ const CheckOutFormRaw = props =>  (
         <label>Dirección</label>
       </div>
         <div className="col two-thirds">
-        <textarea className="big" id="direccion" onKeyDown={() => props.setAddress(direccion.value)}></textarea>
+        <textarea className="big" id="direccion" onInput={() => props.setAddress(direccion.value)}></textarea>
       </div>
     </div>
     <div className="row">

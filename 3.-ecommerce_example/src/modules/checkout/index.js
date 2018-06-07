@@ -10,18 +10,19 @@ const initialState = {
 }
 
 export const checkoutReducer = (state = initialState, action) => {
-  console.log(action)
   switch(action.type){
     case ActionTypes.SET_NAME:
       return {
         ...state,
         name: action.name,
       }
+
     case ActionTypes.SET_LAST_NAME:
       return {
         ...state,
         lastName: action.lastName,
       }
+
     case ActionTypes.SET_EMAIL:
       return {
         ...state,
@@ -33,6 +34,7 @@ export const checkoutReducer = (state = initialState, action) => {
         ...state,
         address: action.address
       }
+      
     default: return state
   }
 }
