@@ -1,14 +1,17 @@
 import React from 'react'
+import { connect } from "react-redux"
 import { Link } from 'react-router-dom'
+import { setName, setLastName, setEmail, setAddress, getName, getLastName, getEmail, getAddress } from '../modules/checkout'
 
-export const CheckOutForm = () =>  (
+
+const CheckOutFormRaw = props =>  (
   <div className="checkout-form">
     <div className="row">
       <div className="col one-third">
         <label>Nombre</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" name="nombre" />
+        <input type="text" id="nombre" onKeyDown={() => props.setName(nombre.value)}/>
       </div>
     </div>
     <div className="row">
@@ -16,7 +19,7 @@ export const CheckOutForm = () =>  (
         <label>Apellidos</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" name="nombre" />
+        <input type="text" id="apellido" onKeyDown={() => props.setLastName(apellido.value)}/>
       </div>
     </div>
     <div className="row">
@@ -24,8 +27,8 @@ export const CheckOutForm = () =>  (
         <label>Email</label>
       </div>
       <div className="col two-thirds">
-        <input type="text" name="nombre" className='error' />
-        <span className="error-text">El nombre es obligatorio</span>
+        <input type="text" id="email" className='error' onKeyDown={() => props.setEmail(email.value)}/>
+        <span className="error-text">El email es obligatorio</span>
       </div>
     </div>
     <div className="row">
@@ -33,7 +36,7 @@ export const CheckOutForm = () =>  (
         <label>Dirección</label>
       </div>
         <div className="col two-thirds">
-        <textarea className="big"></textarea>
+        <textarea className="big" id="direccion" onKeyDown={() => props.setAddress(direccion.value)}></textarea>
       </div>
     </div>
     <div className="row">
@@ -45,3 +48,24 @@ export const CheckOutForm = () =>  (
     </div>
   </div>
 )
+
+const mapStateToPropsCheckout = state => {
+  return { 
+    name: getName(state),
+    lastName: getLastName(state),
+    email: getEmail(state),
+    address: getAddress(state)
+  }
+}
+
+const mapDispatchToPropsCheckout = {
+  setName,
+  setLastName,
+  setEmail,
+  setAddress
+}
+
+export const CheckOutForm = connect(
+  mapStateToPropsCheckout,
+  mapDispatchToPropsCheckout
+)(CheckOutFormRaw)
